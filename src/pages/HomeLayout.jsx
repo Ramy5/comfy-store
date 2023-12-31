@@ -7,7 +7,9 @@ const HomeLayout = () => {
         <h2 className="text-2xl text-primary">comfy</h2>
       </nav>
 
-      <Outlet />
+      <div className="py-20 align-element">
+        <Outlet />
+      </div>
     </>
   );
 };
