@@ -16,7 +16,7 @@ const Register = () => {
         <FormInput type="password" name="password" label={"password"} />
 
         <div>
-          <SubmitButton text={"register"} />
+          <SubmitButton text={"Register"} />
         </div>
 
         <p className="text-center">

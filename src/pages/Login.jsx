@@ -23,10 +23,10 @@ const Login = () => {
         />
 
         <div className="w-full">
-          <SubmitButton text="login" />
+          <SubmitButton text="Login" />
         </div>
 
-        <button className="btn btn-secondary btn-block">guest user</button>
+        <button className="btn btn-secondary btn-block">Guest mode</button>
         <p className="text-center">
           Not a member yet?{" "}
           <Link
