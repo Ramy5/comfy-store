@@ -9,6 +9,6 @@ export default {
   },
   plugins: [daisyui, typography],
   daisyui: {
-    themes: ["sunset", "winter"],
+    themes: ["winter", "sunset"],
   },
 };

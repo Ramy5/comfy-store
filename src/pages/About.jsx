@@ -1,21 +1,28 @@
 const About = () => {
   return (
-    <>
-      <div className="flex font-bold flex-wrap gap-6 align-element justify-center items-center">
-        <h1 className="text-4xl sm:text-6xl leading-none tracking-tight">
+    <div className="align-element">
+      {/* RIGHT */}
+      <div className="flex flex-wrap items-center justify-center gap-4">
+        <h1 className="text-4xl font-bold leading-none tracking-tight sm:text-6xl">
           Welcome to
         </h1>
-        <div className="stats bg-secondary shadow">
+        <div className="shadow stats bg-secondary">
           <div className="stat">
-            <div className="text-4xl stat-title tracking-widest font-bold text-secondary-content">
+            <div className="text-4xl font-bold tracking-widest text-secondary-content stat-title">
               comfy
             </div>
           </div>
         </div>
       </div>
 
-      <p className="mt-6 max-w-2xl leading-8 mx-auto text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae aperiam perferendis maxime amet, rem voluptates magni? Placeat reiciendis, nisi esse laborum ut fugiat dolorem neque necessitatibus cum ad atque ducimus! Similique sed neque nesciunt. Consectetur deserunt quod provident rerum sint!</p>
-    </>
+      {/* LEFT */}
+      <p className="max-w-2xl mx-auto mt-6 text-lg leading-8">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus
+        quae mollitia quia veniam sint deleniti, error impedit a repudiandae
+        optio in est soluta odit animi omnis dolore ullam vel inventore at ipsum
+        non ipsa numquam. Expedita eius quisquam rem maxime.
+      </p>
+    </div>
   );
 };
 

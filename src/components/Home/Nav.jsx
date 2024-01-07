@@ -1,7 +1,8 @@
 import { IoIosMoon } from "react-icons/io";
-import { IoCartOutline, IoSunnySharp } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import { FaBarsStaggered } from "react-icons/fa6";
+import { MdSunny } from "react-icons/md";
 import NavLinks from "../UI/NavLinks";
 import { useEffect, useState } from "react";
 
@@ -10,24 +11,23 @@ const themes = {
   sunset: "sunset",
 };
 
-const getTheme = () => {
+const getThemeFromLocalStorage = () => {
   const theme = localStorage.getItem("theme");
   return theme || themes.winter;
 };
 
 const Nav = () => {
-  const [theme, setTheme] = useState(getTheme());
+  const [theme, setTheme] = useState(getThemeFromLocalStorage());
 
   const handleTheme = () => {
     const { winter, sunset } = themes;
-
     const newTheme = theme === winter ? sunset : winter;
     setTheme(newTheme);
   };
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   return (
@@ -68,12 +68,11 @@ const Nav = () => {
 
         {/* RIGHT */}
         <div className="flex navbar-end gap-x-2">
-          <div className="btn btn-ghost btn-circle btn-md">
+          <div className={"btn btn-ghost btn-circle"}>
             <label className="swap swap-rotate">
-              <input type="checkbox" onClick={handleTheme} />
-
+              <input type="checkbox" onChange={handleTheme} />
               <IoIosMoon className="w-6 h-6 swap-on" />
-              <IoSunnySharp className="w-6 h-6 swap-off" />
+              <MdSunny className="w-6 h-6 swap-off" />
             </label>
           </div>
           <NavLink to={"/cart"} className={"btn btn-ghost btn-circle btn-md"}>
