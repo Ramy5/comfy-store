@@ -28,3 +28,21 @@ export const formatPrice = (number, currency = "USD", formatType = "en-US") => {
 
   return numberFormat.format(number / 100);
 };
+
+/**
+ * Generates an array of options for a select input based on the specified length.
+ *
+ * @param {number} length - The length of the array to be generated.
+ * @returns {JSX.Element[]} An array of JSX elements representing the options.
+ */
+export const generateAmount = (length) => {
+  return Array.from({ length }, (_, index) => {
+    const amountCount = index + 1;
+
+    return (
+      <option key={amountCount} value={amountCount}>
+        {amountCount}
+      </option>
+    );
+  });
+};

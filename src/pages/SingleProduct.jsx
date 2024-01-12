@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom";
-import { customFetch, formatPrice } from "../utils";
+import { customFetch, formatPrice, generateAmount } from "../utils";
 import { useState } from "react";
 
 export const loader = async ({ params }) => {
@@ -12,6 +12,7 @@ const SingleProduct = () => {
   const { colors, company, description, image, price, title } =
     product.attributes;
   const [activeColor, setActiveColor] = useState(colors[0]);
+  const [amount, setAmount] = useState(1);
 
   return (
     <div>
@@ -28,7 +29,7 @@ const SingleProduct = () => {
       </div>
 
       {/* SINGLE PRODUCT */}
-      <section className="grid gap-8 mt-6 lg:grid-cols-2">
+      <section className="grid mt-6 gap-14 lg:grid-cols-2">
         <img
           src={image}
           alt={title}
@@ -40,6 +41,8 @@ const SingleProduct = () => {
           <h5 className="my-2 text-xl font-bold">{company}</h5>
           <h4 className="text-xl">{formatPrice(price)}</h4>
           <p className="my-6 leading-8">{description}</p>
+
+          {/* COLORS */}
           <div className="">
             <p className="mb-2 text-lg font-medium">Colors</p>
             <div className="flex gap-2">
@@ -58,6 +61,28 @@ const SingleProduct = () => {
                 );
               })}
             </div>
+          </div>
+
+          {/* AMOUNT */}
+          <div className="mt-8">
+            <p className="mb-2 text-lg font-medium">Amount</p>
+            <select
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className="w-full max-w-xs select select-bordered select-secondary"
+            >
+              {generateAmount(20)}
+            </select>
+          </div>
+
+          {/* ADD TO CART */}
+          <div className="mt-8">
+            <button
+              className="btn btn-secondary"
+              onClick={() => console.log("add to cart")}
+            >
+              <h3 className="font-semibold uppercase">Add to Cart</h3>
+            </button>
           </div>
         </div>
       </section>
