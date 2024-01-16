@@ -4,6 +4,8 @@ export { default as FeaturedProducts } from "./Home/FeaturedProducts";
 export { default as Header } from "./Layout/Header";
 export { default as ProductsContainer } from "./Products/ProductsContainer";
 export { default as FormInput } from "./UI/FormInput";
+export { default as FormRange } from "./UI/FormRange";
+export { default as FromSelect } from "./UI/FormSelect";
 export { default as SubmitButton } from "./UI/SubmitButton";
 export { default as NavLinks } from "./UI/NavLinks";
 export { default as ErrorElement } from "./UI/ErrorElement";
