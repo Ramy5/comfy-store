@@ -14,3 +14,4 @@ export { default as ProductsGrid } from "./UI/ProductsGrid";
 export { default as ProductsList } from "./UI/ProductsList";
 export { default as Pagination } from "./UI/Pagination";
 export { default as SearchFilter } from "./UI/SearchFilter";
+export { default as Loading } from "./UI/Loading";
