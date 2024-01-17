@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import { formatPrice } from "../../utils";
 
+/**
+ * A custom form range component.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.label - The label for the form range.
+ * @param {string} props.name - The name attribute for the form range.
+ * @param {string} props.size - The size of the form range.
+ * @param {number} props.defaultValue - The default value for the form range.
+ * @returns {JSX.Element} The rendered FormRange component.
+ */
 const FormRange = ({ label, name, size, defaultValue }) => {
   const step = 1000;
   const maxPrice = 100000;
