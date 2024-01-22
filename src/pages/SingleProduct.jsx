@@ -1,6 +1,8 @@
 import { Link, useLoaderData } from "react-router-dom";
 import { customFetch, formatPrice, generateAmount } from "../utils";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addItems } from "../features/cart/cartSlice";
 
 export const loader = async ({ params }) => {
   const response = await customFetch(`/products/${params.id}`);
@@ -11,8 +13,24 @@ const SingleProduct = () => {
   const { product } = useLoaderData();
   const { colors, company, description, image, price, title } =
     product.attributes;
-  const [activeColor, setActiveColor] = useState(colors[0]);
   const [amount, setAmount] = useState(1);
+  const dispatch = useDispatch();
+  const [activeColor, setActiveColor] = useState(colors[0]);
+
+  const productItem = {
+    cartID: product.id + activeColor,
+    productID: product.id,
+    productColor: activeColor,
+    title,
+    image,
+    company,
+    amount,
+    price,
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addItems({ productItem }));
+  };
 
   return (
     <div>
@@ -68,7 +86,7 @@ const SingleProduct = () => {
             <p className="mb-2 text-lg font-medium">Amount</p>
             <select
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => setAmount(parseInt(e.target.value))}
               className="w-full max-w-xs select select-bordered select-secondary"
             >
               {generateAmount(20)}
@@ -77,10 +95,7 @@ const SingleProduct = () => {
 
           {/* ADD TO CART */}
           <div className="mt-8">
-            <button
-              className="btn btn-secondary"
-              onClick={() => console.log("add to cart")}
-            >
+            <button className="btn btn-secondary" onClick={handleAddToCart}>
               <h3 className="font-semibold uppercase">Add to Cart</h3>
             </button>
           </div>

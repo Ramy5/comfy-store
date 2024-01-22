@@ -5,6 +5,7 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { MdSunny } from "react-icons/md";
 import NavLinks from "../UI/NavLinks";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const themes = {
   winter: "winter",
@@ -29,6 +30,8 @@ const Nav = () => {
     localStorage.setItem("theme", theme);
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  const numItemsInCart = useSelector((state) => state.reducer.numItemsInCart);
 
   return (
     <nav className="bg-base-200">
@@ -79,7 +82,7 @@ const Nav = () => {
             <div className="indicator">
               <IoCartOutline className="w-6 h-6" />
               <div className="badge badge-secondary badge-sm indicator-item">
-                8
+                {numItemsInCart}
               </div>
             </div>
           </NavLink>
