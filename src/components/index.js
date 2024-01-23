@@ -1,8 +1,20 @@
+// CART
+export { default as CartItem } from "./Cart/CartItem";
+export { default as CartItemsList } from "./Cart/CartItemsList";
+export { default as CartTotals } from "./Cart/CartTotals";
+
+// HOME
 export { default as Nav } from "./Home/Nav";
 export { default as Hero } from "./Home/Hero";
 export { default as FeaturedProducts } from "./Home/FeaturedProducts";
+
+// LAYOUT
 export { default as Header } from "./Layout/Header";
+
+// PRODUCTS
 export { default as ProductsContainer } from "./Products/ProductsContainer";
+
+// UI
 export { default as FormInput } from "./UI/FormInput";
 export { default as FormRange } from "./UI/FormRange";
 export { default as FromSelect } from "./UI/FormSelect";
