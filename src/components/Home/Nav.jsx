@@ -4,32 +4,15 @@ import { NavLink } from "react-router-dom";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { MdSunny } from "react-icons/md";
 import NavLinks from "../UI/NavLinks";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-
-const themes = {
-  winter: "winter",
-  sunset: "sunset",
-};
-
-const getThemeFromLocalStorage = () => {
-  const theme = localStorage.getItem("theme");
-  return theme || themes.winter;
-};
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../../features/user/userSlice";
 
 const Nav = () => {
-  const [theme, setTheme] = useState(getThemeFromLocalStorage());
+  const dispatch = useDispatch();
 
   const handleTheme = () => {
-    const { winter, sunset } = themes;
-    const newTheme = theme === winter ? sunset : winter;
-    setTheme(newTheme);
+    dispatch(toggleTheme());
   };
-
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
 
   const numItemsInCart = useSelector((state) => state.reducer.numItemsInCart);
 
