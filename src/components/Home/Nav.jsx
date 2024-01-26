@@ -14,7 +14,7 @@ const Nav = () => {
     dispatch(toggleTheme());
   };
 
-  const numItemsInCart = useSelector((state) => state.reducer.numItemsInCart);
+  const numItemsInCart = useSelector((state) => state.cart.numItemsInCart);
 
   return (
     <nav className="bg-base-200">

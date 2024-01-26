@@ -3,7 +3,7 @@ import { formatPrice } from "../../utils";
 
 const CartTotals = () => {
   const { cartTotal, shipping, tax, orderTotal } = useSelector(
-    (state) => state.reducer
+    (state) => state.cart
   );
 
   return (

@@ -108,4 +108,4 @@ export const { addItems, removeItems, clearItems, editItems } =
   cartSlice.actions;
 
 // EXPORT THE SLICE
-export default cartSlice;
+export default cartSlice.reducer;

@@ -3,10 +3,6 @@ import { formatPrice } from "../../utils";
 
 const ProductsGrid = () => {
   const { products } = useLoaderData();
-  console.log(
-    "🚀 ~ file: ProductsGrid.jsx:5 ~ ProductsGrid ~ products:",
-    products
-  );
 
   return (
     <div className="grid gap-4 pt-10 md:grid-cols-2 lg:grid-cols-3">
