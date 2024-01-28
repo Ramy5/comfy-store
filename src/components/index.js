@@ -3,6 +3,9 @@ export { default as CartItem } from "./Cart/CartItem";
 export { default as CartItemsList } from "./Cart/CartItemsList";
 export { default as CartTotals } from "./Cart/CartTotals";
 
+// CHECKOUT
+export { default as CheckoutForm } from "./checkout/CheckoutForm";
+
 // HOME
 export { default as Nav } from "./Home/Nav";
 export { default as Hero } from "./Home/Hero";

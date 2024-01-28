@@ -1,8 +1,15 @@
 import { FormInput, SubmitButton } from "../components";
-import { Link, Form, redirect } from "react-router-dom";
+import {
+  Link,
+  Form,
+  redirect,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import { customFetch } from "../utils";
 import { toast } from "react-toastify";
 import { loginUser } from "../features/user/userSlice";
+import { useDispatch } from "react-redux";
 
 export const action = (store) => {
   return async ({ request }) => {
@@ -25,6 +32,27 @@ export const action = (store) => {
 };
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "loading";
+
+  const handleLoginAsGuestUser = async () => {
+    try {
+      const response = await customFetch.post("/auth/local", {
+        identifier: "test@test.com",
+        password: "secret",
+      });
+
+      dispatch(loginUser(response.data));
+      toast.success("Welcome guest user");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      toast.error("Something happend when logged in with guest user");
+    }
+  };
+
   return (
     <section className="grid h-screen place-items-center">
       <Form
@@ -32,24 +60,27 @@ const Login = () => {
         className="p-6 space-y-4 shadow-lg card glass bg-base-100 w-96"
       >
         <h4 className="text-3xl font-bold text-center text-primary">Login</h4>
-        <FormInput
-          type="email"
-          defaultValue="test@test.com"
-          label="Email"
-          name="identifier"
-        />
-        <FormInput
-          type="password"
-          defaultValue="secret"
-          label="Password"
-          name="password"
-        />
+        <FormInput type="email" label="Email" name="identifier" />
+        <FormInput type="password" label="Password" name="password" />
 
         <div className="w-full">
           <SubmitButton text="Login" />
         </div>
 
-        <button className="btn btn-secondary btn-block">Guest mode</button>
+        <button
+          type="button"
+          className="btn btn-secondary btn-block"
+          onClick={handleLoginAsGuestUser}
+        >
+          {isSubmitting ? (
+            <>
+              <span className="loading loading-spinner loading-sm"></span>{" "}
+              Sending...
+            </>
+          ) : (
+            "Guest mode"
+          )}
+        </button>
         <p className="text-center">
           Not a member yet?{" "}
           <Link
