@@ -7,7 +7,7 @@ const SubmitButton = ({ text }) => {
   return (
     <button
       type="submit"
-      className="btn-block btn btn-primary"
+      className="btn-block btn btn-secondary capitalize"
       disabled={isSubmitting}
     >
       {isSubmitting ? (
