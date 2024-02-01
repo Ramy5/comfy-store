@@ -21,11 +21,12 @@ import { loader as landingLoader } from "./pages/Landing";
 import { loader as singleProductLoader } from "./pages/SingleProduct";
 import { loader as productsLoader } from "./pages/Products";
 import { loader as checkoutLoader } from "./pages/Checkout";
+import { loader as orderLoader } from "./pages/Orders";
 
 // ACTIONS
 import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
-import {action as checkoutAction} from "./components/checkout/CheckoutForm"
+import { action as checkoutAction } from "./components/checkout/CheckoutForm";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
       {
         path: "/orders",
         element: <Orders />,
+        loader: orderLoader(store),
       },
       {
         path: "/products",
@@ -67,7 +69,7 @@ const router = createBrowserRouter([
         path: "/checkout",
         element: <Checkout />,
         loader: checkoutLoader(store),
-        action: checkoutAction(store)
+        action: checkoutAction(store),
       },
     ],
   },

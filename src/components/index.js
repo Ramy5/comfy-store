@@ -14,6 +14,9 @@ export { default as FeaturedProducts } from "./Home/FeaturedProducts";
 // LAYOUT
 export { default as Header } from "./Layout/Header";
 
+// ORDER
+export {default as OrdersList} from "./Order/OrdersList"
+
 // PRODUCTS
 export { default as ProductsContainer } from "./Products/ProductsContainer";
 
@@ -28,5 +31,6 @@ export { default as SectionTitle } from "./UI/SectionTitle";
 export { default as ProductsGrid } from "./UI/ProductsGrid";
 export { default as ProductsList } from "./UI/ProductsList";
 export { default as Pagination } from "./UI/Pagination";
+export { default as ComplexPagination} from "./UI/ComplexPagination"
 export { default as SearchFilter } from "./UI/SearchFilter";
 export { default as Loading } from "./UI/Loading";
