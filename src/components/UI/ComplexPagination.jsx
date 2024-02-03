@@ -1,4 +1,9 @@
-import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import {
+  redirect,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 /**
  * Renders a pagination component.
@@ -9,11 +14,6 @@ const complexPagination = () => {
   const { pageCount, page } = meta.pagination;
   const { search, pathname } = useLocation();
   const navigate = useNavigate();
-
-  const paginationNumber = Array.from(
-    { length: pageCount },
-    (_, index) => index + 1
-  );
 
   const handlePaginate = (pageNumber) => {
     const searchParams = new URLSearchParams(search);
@@ -37,6 +37,45 @@ const complexPagination = () => {
 
   const renderPaginationButtons = () => {
     const paginationButtons = [];
+
+    // FIRST BUTTON
+    paginationButtons.push(
+      addPaginationButtons({ paginationNumber: 1, activeClass: page === 1 })
+    );
+
+    // DOTS BETWEEN THE FIRST AND THE CURRENT BUTTON
+    if (page > 2) {
+      paginationButtons.push(
+        <button key="dots-1" className="btn join-item">
+          ...
+        </button>
+      );
+    }
+
+    // CURRENT / ACTIVE BUTTON
+    if (page !== 1 && page !== pageCount) {
+      paginationButtons.push(
+        addPaginationButtons({ paginationNumber: page, activeClass: true })
+      );
+    }
+
+    // DOTS BETWEEN THE CURRENT BUTTON AND THE LAST ONE
+    if (page < pageCount - 1) {
+      paginationButtons.push(
+        <button key="dots-2" className="btn join-item">
+          ...
+        </button>
+      );
+    }
+
+    // LAST BUTTON
+    paginationButtons.push(
+      addPaginationButtons({
+        paginationNumber: pageCount,
+        activeClass: page === pageCount,
+      })
+    );
+
     return paginationButtons;
   };
 
@@ -54,7 +93,7 @@ const complexPagination = () => {
       >
         Prev
       </button>
-      {}
+      {renderPaginationButtons()}
       <button
         className="uppercase join-item btn"
         onClick={() => {

@@ -6,12 +6,11 @@ import { clearItems } from "../../features/cart/cartSlice";
 import { toast } from "react-toastify";
 
 export const action =
-  (store) =>
+  (store, queryClient) =>
   async ({ request }) => {
     const formData = await request.formData();
     const { name, address } = Object.fromEntries(formData);
     const { user } = store.getState().user;
-    console.log("🚀 ~ user:", user)
     const { orderTotal, cartItems, numItemsInCart } = store.getState().cart;
 
     const info = {
@@ -24,22 +23,29 @@ export const action =
     };
 
     try {
-      const response = await customFetch.post("/orders", {data: info}, {
-        headers: {
-          Authorization: `Bearer ${user.token}`
+      const response = await customFetch.post(
+        "/orders",
+        { data: info },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
         }
-      });
+      );
 
-      store.dispatch(clearItems())
-      toast.success("Order placed successfully")
-      return redirect("/orders")
+      queryClient.removeQueries("orders");
+      store.dispatch(clearItems());
+      toast.success("Order placed successfully");
+      return redirect("/orders");
     } catch (error) {
-      console.log(error);
-      const errorMessage = error?.response?.data?.error?.message || "there was an error placing your order"
-      toast.error(errorMessage)
+      const errorMessage =
+        error?.response?.data?.error?.message ||
+        "there was an error placing your order";
+      toast.error(errorMessage);
 
-      if (error.response.status === 401 || error.response.status === 403) return redirect("/login")
-      return null
+      if (error?.response?.status === 401 || error?.response?.status === 403)
+        return redirect("/login");
+      return null;
     }
   };
 

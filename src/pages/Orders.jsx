@@ -3,7 +3,24 @@ import { toast } from "react-toastify";
 import { customFetch } from "../utils";
 import { ComplexPagination, OrdersList, SectionTitle } from "../components";
 
-export const loader = (store) => {
+const ordersQuery = (user, params) => {
+  return {
+    queryKey: [
+      "orders",
+      user.username,
+      params.page ? parseInt(params.page) : 1,
+    ],
+    queryFn: () =>
+      customFetch.get("/orders", {
+        params,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }),
+  };
+};
+
+export const loader = (store, queryClient) => {
   return async ({ request }) => {
     const user = store.getState().user.user;
 
@@ -17,12 +34,9 @@ export const loader = (store) => {
     ]);
 
     try {
-      const response = await customFetch.get("/orders", {
-        params,
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      const response = await queryClient.ensureQueryData(
+        ordersQuery(user, params)
+      );
 
       return { orders: response.data.data, meta: response.data.meta };
     } catch (error) {
@@ -31,7 +45,7 @@ export const loader = (store) => {
         "There was an error placing your orders";
       toast.error(message);
 
-      if (error.response.status === 401 || error.response.status === 403)
+      if (error?.response?.status === 401 || error?.response?.status === 403)
         return redirect("/login");
       return null;
     }

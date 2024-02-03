@@ -48,7 +48,6 @@ const Login = () => {
       toast.success("Welcome guest user");
       navigate("/");
     } catch (error) {
-      console.log(error);
       toast.error("Something happend when logged in with guest user");
     }
   };

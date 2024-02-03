@@ -28,7 +28,6 @@ const userSlice = createSlice({
   reducers: {
     loginUser: (state, action) => {
       const user = { ...action.payload.user, token: action.payload.jwt };
-      console.log("🚀 ~ user:", user);
       state.user = user;
       localStorage.setItem("user", JSON.stringify(user));
     },
