@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
   const user = useSelector((state) => state.user.user);
-  console.log("🚀 ~ Cart ~ user:", user);
   const numItemsInCart = useSelector((state) => state.cart.numItemsInCart);
 
   if (numItemsInCart === 0) {
